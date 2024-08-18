@@ -6,9 +6,11 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.44",
+    "@vespaiach/axios-fetch-adapter": "^0.3.1",
     "ai": "^3.3.5",
     "axios": "^1.7.3",
     "hono": "^4.5.4",
+    "mem0ai": "^1.0.4",
     "zod": "^3.23.8"
   },
   "devDependencies": {

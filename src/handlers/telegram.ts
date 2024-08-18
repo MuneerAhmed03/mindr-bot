@@ -2,6 +2,7 @@ import { Message } from "../types";
 import axios from "axios";
 import { Config } from "../types";
 import { getConfig } from "../config";
+import { addMemory } from "./mem0";
 
 
 // async function sendMessage(id: number, message: string) {
@@ -36,7 +37,7 @@ async function sendMessage(id: number, message: string, token: string) {
 
 export async function handleMessage(message: Message ,config :Config)  {
     
-  const messageText = message.text;
+  const messageText = message.text ?? " ";
   const chat_id = message.chat.id;
   let reply = "";
 
@@ -56,5 +57,7 @@ export async function handleMessage(message: Message ,config :Config)  {
   } else {
     reply = messageText ?? ""; 
   }
+  const response  = await addMemory(messageText,chat_id ,config?.MEM0_API_KEY);
+  console.log("added memory ", response);
   return await sendMessage(chat_id, reply, config?.TELEGRAM_BOT_TOKEN);
 }
