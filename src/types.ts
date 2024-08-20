@@ -1,7 +1,13 @@
+export type ENV = {
+  TELEGRAM_BOT_TOKEN: string;
+  MEM0_API_KEY: string;
+  LLAMA_API_KEY: string;
+}
+
 export type Config= {
     TELEGRAM_BOT_TOKEN: string;
-    MEM0_API_KEY: string;
     LLAMA_API_KEY: string;
+    AI : Ai;
   };
 
 export type Message = {
