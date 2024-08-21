@@ -14,7 +14,7 @@ const tgRouter = new Hono<{ Bindings: Config }>();
 
 tgRouter.post("*", async (c) => {
   const body = await c.req.json();
-  const config = getConfig();
+// const config = getConfig();
   if (invalid(body.message)) {
   }
 
@@ -22,7 +22,7 @@ tgRouter.post("*", async (c) => {
   if (!message) {
     return c.text("invalid message");
   }
-  const result = await handleMessage(message,config);
+  const result = await handleMessage(message,c.env);
   return c.text("Hello post!");
 });
 

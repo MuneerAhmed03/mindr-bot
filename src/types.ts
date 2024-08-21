@@ -8,6 +8,8 @@ export type Config= {
     TELEGRAM_BOT_TOKEN: string;
     LLAMA_API_KEY: string;
     AI : Ai;
+    SB_URL:string;
+    SB_KEY:string;
   };
 
 export type Message = {

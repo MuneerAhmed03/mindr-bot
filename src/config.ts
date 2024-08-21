@@ -3,6 +3,7 @@ import {Config} from "./types"
 let config : Config | null = null;
 
 export function initConfig(env:Config){
+    console.log(env);
     config = env;
 }
 export function getConfig(){

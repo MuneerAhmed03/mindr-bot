@@ -1,8 +1,7 @@
 import { Message } from "../types";
-import axios from "axios";
 import { Config } from "../types";
-import { getConfig } from "../config";
-
+import { createClient } from '@supabase/supabase-js'
+import { v4 as uuidv4 } from 'uuid'
 
 // async function sendMessage(id: number, message: string) {
 //   try {
@@ -17,6 +16,7 @@ import { getConfig } from "../config";
 //     throw new Error("Failed to send message");
 //   }
 // }
+
 
 async function sendMessage(id: number, message: string, token: string) {
     try {
@@ -35,10 +35,12 @@ async function sendMessage(id: number, message: string, token: string) {
   
 
 export async function handleMessage(message: Message ,config :Config)  {
+  console.log("handle message started");
+  const supabase = createClient(config.SB_URL, config.SB_KEY);
     
   const messageText = message.text;
   const chat_id = message.chat.id;
-  let reply = "";
+  let reply = "message recieved";
 
   if (messageText?.startsWith('/')) {
     const command = messageText.slice(1).toLowerCase(); 
@@ -54,7 +56,15 @@ export async function handleMessage(message: Message ,config :Config)  {
         break;
     }
   } else {
-    reply = messageText ?? ""; 
+    const uuid = uuidv4();
+
+    const { error } = await supabase
+    .from('memory')
+    .insert({ user_id:chat_id ,memory_id: uuid, content: messageText })
+    if(error){
+        console.log(error);
+        return;
+    }
   }
   return await sendMessage(chat_id, reply, config?.TELEGRAM_BOT_TOKEN);
 }

@@ -1,17 +1,17 @@
 import { Hono } from "hono";
 import { Config, Message } from "./types";
 import { initConfig, getConfig } from "./config";
-import { pick, invalid } from "./lib/utils/filter";
-import { handleMessage } from "./handlers/telegram";
 import tgRouter from "./routes/tg"
 import memoryRouter from "./routes/memory"
 
+
 const app = new Hono<{ Bindings: Config }>();
 
-app.use("*", async (c, next) => {
-    initConfig(c.env);
-  await next();
-});
+// app.use("*", async (c, next) => {
+//     console.log(c.env);
+//     initConfig(c.env);
+//   await next();
+// });
 
 app.get("/", async (c) => {
   return c.text("Hello from hono!");
