@@ -17,8 +17,8 @@ export type Message = {
   chat : Chat 
   date : number,
   text ?:string,
-  entities ?: MessageEntity[],
-  
+  entities ?: MessageEntity[]
+  valid :boolean,
 }
 export type Chat ={
   id:number,

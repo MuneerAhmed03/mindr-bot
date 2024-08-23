@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { Config, Message } from "../types";
 import { initConfig, getConfig } from "../config";
-import { pick, invalid } from "../lib/utils/filter";
+import { pick } from "../lib/utils/filter";
 import { generateClient } from "../lib/utils/client";
 import { v4 as uuidv4 } from "uuid";
 import {
@@ -18,18 +18,19 @@ const tgRouter = new Hono<{ Bindings: Config }>();
 
 tgRouter.post("*", async (c) => {
   const body = await c.req.json();
-  if (invalid(body.message)) {
-    const response = await sendMessage(
-      body.message.chat_id,
-      "Current Version of MindR can only store text memories",
-      c.env.TELEGRAM_BOT_TOKEN
-    );
-    return c.json({ message: "Invalid Submission!", response });
-  }
 
   const message: Message | null = pick(body);
   if (!message) {
     return c.text("invalid message");
+  }
+  console.log(message);
+  if (!message.valid) {
+      const response = await sendMessage(
+      message.chat.id,
+      "Current Version of MindR can only store text memories",
+      c.env.TELEGRAM_BOT_TOKEN
+    );
+    return c.text("Invalid message");
   }
 
   if (message.text?.startsWith("/")) {

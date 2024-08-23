@@ -8,8 +8,19 @@ import ChatBot from "../lib/utils/ai";
 export async function sendMessage(id: number, message: string, token: string) {
   try {
     console.log("token", token);
+    const data ={
+      chat_id: id,
+      text: message,
+      parse_mode: "Markdown",
+    }
     const response = await fetch(
-      `https://api.telegram.org/bot${token}/sendMessage?chat_id=${id}&text=${message}&parse\\_mode=Markdown`
+      `https://api.telegram.org/bot${token}/sendMessage`,{
+        method: "POST",
+        headers:{
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
     );
     if (!response.ok) {
       const reader = response.body?.getReader();
@@ -52,10 +63,8 @@ export  async function handleCommands(message: Message, config: Config) {
       break;
     case "query":
       const memories = await query(message,config);
-      console.time('Execution Time');
       const bot = new ChatBot(config.AI,memories);
       const response = await bot.query(messageText);
-      console.timeEnd('Execution Time');
       console.log("final",response)
       reply = response;
       break;
