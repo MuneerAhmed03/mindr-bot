@@ -1,27 +1,7 @@
-create schema if not exists private;
-create extension if not exists pg_net with schema extensions;
-create extension if not exists vector with schema extensions;
-
-
-DROP TABLE IF EXISTS memory;
-
--- Create the memory table without user_id as the primary key
-    CREATE TABLE memory (
-        memory_id uuid PRIMARY KEY, -- Use memory_id as the primary key
-        user_id integer NOT NULL,   -- Keep user_id as a foreign key, not the primary key
-        content text NOT NULL,
-        embedding vector(768)
-    );
-
-CREATE INDEX ON memory USING hnsw (embedding vector_ip_ops);
-
--- Create an index for user_id to allow efficient lookups by user
-DROP INDEX IF EXISTS idx_user_id;
-
 drop trigger if exists memory_embedding_trigger on memory;
 drop function if exists private.embedding_trigger;
 
-create function supabase_url()
+create function workers_url()
 returns text
 language plpgsql
 security definer
@@ -46,7 +26,7 @@ BEGIN
 
     SELECT
         net.http_post(
-            url := supabase_url() || '/memory/embed',
+            url := workers_url() || '/memory/embed',
             headers := jsonb_build_object('Content-Type', 'application/json'),
             body := jsonb_build_object(
                 'id', new.memory_id,
@@ -111,3 +91,38 @@ begin
   return result;
 end;
 $$;
+
+CREATE OR REPLACE FUNCTION private.onboarding_trigger()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    result INT;
+BEGIN
+
+    SELECT
+        net.http_post(
+            url := workers_url() || '/start',
+            headers := jsonb_build_object('Content-Type', 'application/json'),
+            body := jsonb_build_object(
+                'id', NEW.id
+            )
+        )
+    INTO result;
+
+    -- Check the HTTP status code of the response
+    IF result >= 200 AND result < 300 THEN
+        -- Successful response (2xx status code)
+        RETURN new;
+    ELSE
+        -- Error response
+        RAISE NOTICE 'Error sending data to memory embedding service. Status code: %', result;
+        RETURN null; -- Or handle the error in another way
+    END IF;
+END;
+$$;
+
+create or replace trigger user_onboarding_trigger
+    after insert on users
+    for each row
+    execute function private.onboarding_trigger();

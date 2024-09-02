@@ -8,15 +8,16 @@ import ChatBot from "../lib/utils/ai";
 export async function sendMessage(id: number, message: string, token: string) {
   try {
     console.log("token", token);
-    const data ={
+    const data = {
       chat_id: id,
       text: message,
       parse_mode: "Markdown",
-    }
+    };
     const response = await fetch(
-      `https://api.telegram.org/bot${token}/sendMessage`,{
+      `https://api.telegram.org/bot${token}/sendMessage`,
+      {
         method: "POST",
-        headers:{
+        headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
@@ -25,18 +26,18 @@ export async function sendMessage(id: number, message: string, token: string) {
     if (!response.ok) {
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
-      let result = '';
+      let result = "";
       let done = false;
-  
+
       while (!done) {
-          //@ts-ignore
-          const { value, done: streamDone } = await reader.read();
-          done = streamDone;
-          if (value) {
-              result += decoder.decode(value, { stream: !done });
-          }
+        //@ts-ignore
+        const { value, done: streamDone } = await reader.read();
+        done = streamDone;
+        if (value) {
+          result += decoder.decode(value, { stream: !done });
+        }
       }
-  
+
       console.log("Failed to send message", result);
       throw new Error("Failed to send message");
     }
@@ -47,7 +48,7 @@ export async function sendMessage(id: number, message: string, token: string) {
   }
 }
 
-export  async function handleCommands(message: Message, config: Config) {
+export async function handleCommands(message: Message, config: Config) {
   let reply;
   const messageText = message.text ?? "";
   const command = messageText.slice(1).toLowerCase().split(" ")[0];
@@ -55,17 +56,17 @@ export  async function handleCommands(message: Message, config: Config) {
   switch (command) {
     case "start":
       reply =
-        "Hello! I am MindR, your personal assistant. How can I help you today?";
+        "Hello! I am MindR, your AI Powered Sceond Brain. How can I help you today?";
       break;
     case "help":
       reply =
         "You can use the following commands:\n\n/start - Start the bot\n\n/help - Show this help message";
       break;
     case "query":
-      const memories = await query(message,config);
-      const bot = new ChatBot(config.AI,memories);
+      const memories = await query(message, config);
+      const bot = new ChatBot(config.AI, memories);
       const response = await bot.query(messageText);
-      console.log("final",response)
+      console.log("final", response);
       reply = response;
       break;
     default:

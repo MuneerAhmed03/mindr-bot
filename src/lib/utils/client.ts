@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-import { Config } from "../../types";
+
 
 
 export async function generateClient(SB_URL: string, SB_KEY: string) {

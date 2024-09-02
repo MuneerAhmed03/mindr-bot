@@ -10,8 +10,6 @@ export function pick(obj: any): Message | null {
 
   const messageObj = obj.message;
 
-
-
   if ("message_id" in messageObj) message.message_id = messageObj.message_id;
   if ("chat" in messageObj && typeof messageObj.chat === "object") {
     message.chat = {
