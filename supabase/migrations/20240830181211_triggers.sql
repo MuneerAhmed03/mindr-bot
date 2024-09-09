@@ -9,7 +9,7 @@ as $$
 declare
   secret_value text;
 begin
-  select decrypted_secret into secret_value from vault.decrypted_secrets where name = 'supabase_url';
+  select decrypted_secret into secret_value from vault.decrypted_secrets where name = 'workers_url';
   return secret_value;
 end;
 $$;

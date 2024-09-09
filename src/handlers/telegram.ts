@@ -62,7 +62,7 @@ export async function handleCommands(message: Message, config: Config) {
       reply =
         "You can use the following commands:\n\n/start - Start the bot\n\n/help - Show this help message";
       break;
-    case "query":
+    case "ask":
       const memories = await query(message, config);
       const bot = new ChatBot(config.AI, memories);
       const response = await bot.query(messageText);

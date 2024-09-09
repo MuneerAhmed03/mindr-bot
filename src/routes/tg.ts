@@ -29,7 +29,6 @@ tgRouter.post("*", async (c) => {
 
   if (error) {
     console.error("Error checking if field exists:", error);
-    return c.text("Error checking if field exists");
   }
 
   if (data === null) {
