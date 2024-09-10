@@ -16,7 +16,8 @@ tgRouter.post("*", async (c) => {
   if (!message) {
     return c.text("invalid message");
   }
-
+  
+  console.log("enviornment variable : ", c.env);
   
   const supabase = await generateClient(c.env.SB_URL, c.env.SB_KEY);
 

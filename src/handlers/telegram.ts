@@ -4,7 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 import { parse, v4 as uuidv4 } from "uuid";
 import { query } from "./query";
 import ChatBot from "../lib/utils/ai";
-
+import { manageTxt, helpText } from "../lib/utils/prompts";
 export async function sendMessage(id: number, message: string, token: string) {
   try {
     console.log("token", token);
@@ -60,7 +60,7 @@ export async function handleCommands(message: Message, config: Config) {
       break;
     case "help":
       reply =
-        "You can use the following commands:\n\n/start - Start the bot\n\n/help - Show this help message";
+        helpText;
       break;
     case "ask":
       const memories = await query(message, config);
@@ -68,6 +68,9 @@ export async function handleCommands(message: Message, config: Config) {
       const response = await bot.query(messageText);
       console.log("final", response);
       reply = response;
+      break;
+    case "manage":
+      reply = manageTxt;
       break;
     default:
       reply =
