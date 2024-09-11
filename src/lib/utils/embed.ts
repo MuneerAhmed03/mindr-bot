@@ -15,6 +15,5 @@ export async function embed(props: props) {
     }
   }
 );
-  console.log(embeddings.data.length);
   return embeddings.data;
 }
