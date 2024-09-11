@@ -1,5 +1,7 @@
 # [MindR Telegram Bot](https://mindrbot.pages.dev/)
 
+![open-graph](https://github.com/user-attachments/assets/58aca34f-9cfd-48c0-a0d0-acfd6973f13d)
+
 MindR is a RAG-based (Retrieval-Augmented Generation) Telegram bot that allows users to store and retrieve text messages easily. Users can send any text message to the chat and later retrieve it using the `/ask` command followed by a query.
 
 ## Features
