@@ -43,6 +43,23 @@ export async function sendMessage(id: number, message: string, token: string) {
     }
     return await response.json();
   } catch (error) {
+
+    // const errorData={
+    //   chat_id: id,
+    //   text: "Sorry I am not able to process your request at the moment. Please try again later.",
+    //   parse_mode: "Markdown",
+    // }
+    // const response = await fetch(
+    //   `https://api.telegram.org/bot${token}/sendMessage`,
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(errorData),
+    //   }
+    // );
+
     console.error("Failed to send message:", error);
     throw new Error("Failed to send message");
   }

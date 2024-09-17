@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS memory;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
-  id integer PRIMARY KEY,
+  id BIGINT PRIMARY KEY,
   username VARCHAR(255),
   first_name VARCHAR(255),
   last_name VARCHAR(255),
@@ -20,7 +20,7 @@ CREATE INDEX idx_users_id ON users(id);
 
     CREATE TABLE memory (
     memory_id uuid PRIMARY KEY,
-    user_id integer NOT NULL,
+    user_id BIGINT NOT NULL,
     content text NOT NULL,
     embedding vector(768),
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
