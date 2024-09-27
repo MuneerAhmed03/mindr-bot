@@ -11,7 +11,7 @@ export async function sendMessage(id: number, message: string, token: string) {
     const data = {
       chat_id: id,
       text: message,
-      parse_mode: "Markdown",
+      parse_mode: "HTML",
     };
     const response = await fetch(
       `https://api.telegram.org/bot${token}/sendMessage`,
