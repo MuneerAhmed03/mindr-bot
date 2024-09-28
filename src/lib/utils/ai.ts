@@ -15,7 +15,7 @@ export default class ChatBot {
 Analyze the memories carefully.
 Formulate a concise and  complete response using only the information from these memories that are relevant to user query.
 If the memories lack relevant details to answer the query, state that you don't have enough information to respond.
-Do not introduce external knowledge or assumptions beyond what is in the memories at all.
+Do not at any cost for any reason introduce external knowledge or assumptions beyond what is in the memories at all.
 If Memories contains tags that starts with # you can group memories that have same tags but the response should not include '#'. Dont include memories that only have some other tag than the one mentioned in the query.
 Maintain a consistent and conversational tone aligned with the memories and address the user in the second person.
 If the memory you are including in a response also have an url, include the complete url in the response.
