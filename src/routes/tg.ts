@@ -1,11 +1,13 @@
 import { Hono } from "hono";
 import { Config, Message } from "../types";
-import { initConfig, getConfig } from "../config";
 import { pick } from "../lib/utils/filter";
 import { generateClient } from "../lib/utils/client";
 import { v4 as uuidv4 } from "uuid";
 import { handleCommands, sendMessage } from "../handlers/telegram";
-import { welcomeMessage } from "../lib/utils/prompts";
+import {
+  welcomeMessage,
+  phrases as progressPhrases,
+} from "../lib/utils/prompts";
 
 const tgRouter = new Hono<{ Bindings: Config }>();
 
@@ -16,9 +18,7 @@ tgRouter.post("*", async (c) => {
   if (!message) {
     return c.text("invalid message");
   }
-  
-  console.log("enviornment variable : ", c.env);
-  
+
   const supabase = await generateClient(c.env.SB_URL, c.env.SB_KEY);
 
   const { data, error } = await supabase
@@ -55,21 +55,32 @@ tgRouter.post("*", async (c) => {
     return c.text("Invalid message");
   }
 
-  if (message.text?.startsWith("/")) {
-    
-    const replyPromise =  handleCommands(message, c.env);
+  if (message && message.text?.startsWith("/")) {
+    const replyPromise = handleCommands(message, c.env);
 
-    try {
-      const response = await sendMessage(
-        message.chat.id,
-        "I'm Thinking ...",
-        c.env.TELEGRAM_BOT_TOKEN
-      );
-    } catch (error) {
-      console.log(error);
-    }
+    let index = 0;
+    const intervalId = setInterval(async () => {
+      if (index < progressPhrases.length) {
+        try {
+            await sendMessage(
+              message.chat.id,
+              progressPhrases[index],
+              c.env.TELEGRAM_BOT_TOKEN
+            );
+            index++;
+          
+        } catch (error) {
+          console.log("Error sending progress phrase:", error);
+        }
+      } else {
+        clearInterval(intervalId); 
+      }
+    }, 3000);
 
-    const reply = await replyPromise;
+    const reply = await handleCommands(message, c.env);
+    clearInterval(intervalId);
+
+
 
     try {
       const response = await sendMessage(

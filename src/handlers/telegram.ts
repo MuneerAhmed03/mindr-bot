@@ -7,7 +7,6 @@ import ChatBot from "../lib/utils/ai";
 import { manageTxt, helpText } from "../lib/utils/prompts";
 export async function sendMessage(id: number, message: string, token: string) {
   try {
-    console.log("token", token);
     const data = {
       chat_id: id,
       text: message,

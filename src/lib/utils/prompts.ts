@@ -55,3 +55,13 @@ MindR is a RAG-based Telegram bot that helps you save and retrieve messages effi
 For more detailed information and advanced features, please visit our website: [MindR](https://mindrbot.pages.dev)
 
 If you need further assistance, feel free to contact our support team through the website.`;
+
+export const phrases = [
+   "I'm Thinking...",
+   "Diving into your second brain...",
+   "I'm deep in thought... give me a sec!",
+   "Calculating... Don't worry, I got this!",
+   "Almost there, organizing the results...",
+   "Preparing your answer..."
+ ];
+
