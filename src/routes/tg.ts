@@ -45,7 +45,7 @@ tgRouter.post("*", async (c) => {
     }
   }
 
-  console.log(message);
+  // console.log(message);
   if (!message.valid) {
     const response = await sendMessage(
       message.chat.id,
@@ -80,8 +80,6 @@ tgRouter.post("*", async (c) => {
     const reply = await handleCommands(message, c.env);
     clearInterval(intervalId);
 
-
-
     try {
       const response = await sendMessage(
         message.chat.id,
@@ -92,6 +90,7 @@ tgRouter.post("*", async (c) => {
     } catch (error) {
       return c.json({ message: "Error sending message", error: error });
     }
+
   } else {
     const uuid = uuidv4();
     const { error } = await supabase.from("memory").insert({
@@ -100,7 +99,7 @@ tgRouter.post("*", async (c) => {
       content: message.text,
     });
     if (error) {
-      console.log(error);
+      console.log("Message insertion error",error);
       return c.json({ message: "Error saving memory", error: error });
     }
   }

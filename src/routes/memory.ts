@@ -10,7 +10,7 @@ memoryRouter.get("/", async (c) => {
 });
 
 memoryRouter.post("/embed", async (c) => {
-  console.log("embeding start");
+  // console.log("embeding start");
   const supabase = await generateClient(c.env.SB_URL, c.env.SB_KEY);
   const { id, text } = await c.req.json();
   const embeddings = await embed({ text: text, ai: c.env.AI });

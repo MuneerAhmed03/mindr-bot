@@ -1,60 +1,65 @@
 export const welcomeMessage = `
-**Welcome to Mindr!**
+<strong>Welcome to Mindr!</strong>
 
-**Mindr** is your second brain on Telegram. Use it to:
+<strong>Mindr</strong> is your second brain on Telegram. Use it to:
 
-- **Save** ideas, thoughts, and knowledge.
-- **Quickly retrieve** information with \`/ask\`
-- **Organize** your notes with tags and categories
 
-To get started, **Sign Up on [MindR](https://mindrbot.pages.dev)** and connect your account.
+- <strong>Save</strong> ideas, thoughts, and knowledge.
+- <strong>Quickly retrieve</strong> information with <code>/ask</code>
+- <strong>Organize</strong> your notes with tags and categories. 
 
-Type \`/help\` to see all available commands, or \`/ask\` followed by your query.
+To get started, <strong>Sign Up on <a href="https://mindrbot.pages.dev">MindR</a></strong> and connect your account.
+<br
+Type <code>/help</code> to see all available commands, or <code>/ask</code> followed by your query.
 
-**Let's take the power of your mind to next level!**
+<strong>Let's take the power of your mind to next level!</strong>
 `;
 
 export const onBoarding = `
-**Welcome to Mindr!**
+<strong>Welcome to Mindr!</strong>
 
-**Lets begin with your onboarding!!**
+<strong>Lets begin with your onboarding!!</strong>
 
-**Mindr** is your second brain on Telegram. Use it to:
+<strong>Mindr</strong> is your second brain on Telegram. Use it to:
 
-- **Save** ideas, thoughts, and memories to your second brain by just sending them to this chat.
-- **Quickly retrieve** information with \`/ask\` folowed by your query
-- **Organize** your memories with tags and categories.
 
-To manage your memories, **visit [MindR](https://mindrbot.pages.dev)**.
+- <strong>Save</strong> ideas, thoughts, and memories to your second brain by just sending them to this chat.
+- <strong>Quickly retrieve</strong> information with <code>/ask</code> followed by your query.
+- <strong>Organize</strong> your memories with tags and categories.
 
-Type \`/help\` to see all available commands, or \`/ask\` followed by your query.
 
-**Let's take your memory to the next level!**
+To manage your memories, <strong>visit <a href="https://mindrbot.pages.dev">MindR</a>.</strong>
+
+Type <code>/help</code> to see all available commands, or <code>/ask</code> followed by your query.
+
+<strong>Let's take your memory to the next level!</strong>
 `
 
-export const manageTxt = `Visit [Your Dashboard](https://mindrbot.pages.dev/dashboard) to view and manage your stored memories efficiently.`
+export const manageTxt = `Visit <a href="https://mindrbot.pages.dev/dashboard">Your Dashboard</a> to view and manage your stored memories efficiently.
+`
 
-
-export const helpText: string = ` **MindR Bot Help**
+export const helpText: string = `<strong>MindR Bot Help</strong>
 
 MindR is a RAG-based Telegram bot that helps you save and retrieve messages efficiently.
 
- **Available Commands:**
+<strong>Available Commands:</strong>
 
-1. \`/ask [query]\`
+1. <code>/ask [query]</code>
    Retrieve saved messages by asking a question or providing keywords.
-   Example: \`/ask What was that recipe for chocolate cake?\`
+   Example: <code>/ask What was that recipe for chocolate cake?</code>
 
-2. \`/manage\`
+2. <code>/manage</code>
    View and manage your saved memories. This command provides instructions on how to organize and delete saved content.
 
- **Tips:**
+<strong>Tips:</strong>
 - Be specific in your queries to get the most relevant results.
 - Regularly manage your saved memories to keep them organized.
 
-For more detailed information and advanced features, please visit our website: [MindR](https://mindrbot.pages.dev)
+For more detailed information and advanced features, please visit our website: <a href="https://mindrbot.pages.dev">MindR</a>
 
-If you need further assistance, feel free to contact our support team through the website.`;
+If you need further assistance, feel free to contact our support team through the website.
+
+`;
 
 export const phrases = [
    "I'm Thinking...",

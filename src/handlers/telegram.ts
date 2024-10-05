@@ -1,11 +1,12 @@
 import { Message } from "../types";
 import { Config } from "../types";
-import { createClient } from "@supabase/supabase-js";
-import { parse, v4 as uuidv4 } from "uuid";
 import { query } from "./query";
 import ChatBot from "../lib/utils/ai";
 import { manageTxt, helpText } from "../lib/utils/prompts";
-export async function sendMessage(id: number, message: string, token: string) {
+
+export async function sendMessage(id: number, message: string, token: string,retryCount = 0) {
+  const MAX_RETRY = 2;
+  const FALLBACK_TEXT = "An error occurred while processing your request. Please try again later.";
   try {
     const data = {
       chat_id: id,
@@ -37,29 +38,18 @@ export async function sendMessage(id: number, message: string, token: string) {
         }
       }
 
-      console.log("Failed to send message", result);
+      if(retryCount<MAX_RETRY){
+        console.log("Failed to send message", result)
+        return sendMessage(id, FALLBACK_TEXT, token,retryCount+1);
+      }
       throw new Error("Failed to send message");
     }
     return await response.json();
   } catch (error) {
-
-    // const errorData={
-    //   chat_id: id,
-    //   text: "Sorry I am not able to process your request at the moment. Please try again later.",
-    //   parse_mode: "Markdown",
-    // }
-    // const response = await fetch(
-    //   `https://api.telegram.org/bot${token}/sendMessage`,
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(errorData),
-    //   }
-    // );
-
     console.error("Failed to send message:", error);
+    if (retryCount < MAX_RETRY) {
+      return sendMessage(id, FALLBACK_TEXT, token, retryCount + 1);
+    }
     throw new Error("Failed to send message");
   }
 }
@@ -68,7 +58,7 @@ export async function handleCommands(message: Message, config: Config) {
   let reply;
   const messageText = message.text ?? "";
   const command = messageText.slice(1).toLowerCase().split(" ")[0];
-  console.log(command);
+  // console.log(command);
   switch (command) {
     case "start":
       reply =
@@ -82,7 +72,7 @@ export async function handleCommands(message: Message, config: Config) {
       const memories = await query(message, config);
       const bot = new ChatBot(config.AI, memories);
       const response = await bot.query(messageText);
-      console.log("final", response);
+      // console.log("final", response);
       reply = response;
       break;
     case "manage":

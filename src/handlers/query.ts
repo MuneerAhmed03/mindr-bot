@@ -11,13 +11,14 @@ export async function query(message:Message , env:Config) {
     const {data ,error} = await supabase.rpc('similarity_search',{
         embedding: embeddings[0],
         id: id,
-        match_threshold:0.5,
+        match_threshold:0.4,
     })
     if(error){
         console.log("error in query",error);
         return "error in query";
-    }else{
-        console.log("data in query",data);
     }
+    // else{
+    //     // console.log("data in query",data);
+    // }
     return data;
 }
