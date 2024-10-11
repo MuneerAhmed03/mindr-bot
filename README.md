@@ -1,4 +1,4 @@
-# [MindR Telegram Bot](https://mindrbot.pages.dev/)
+# [MindR Telegram Bot](https://mindr.live/)
 
 ![open-graph](https://github.com/user-attachments/assets/58aca34f-9cfd-48c0-a0d0-acfd6973f13d)
 

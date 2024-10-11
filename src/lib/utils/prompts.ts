@@ -8,11 +8,13 @@ export const welcomeMessage = `
 - <strong>Quickly retrieve</strong> information with <code>/ask</code>
 - <strong>Organize</strong> your notes with tags and categories. 
 
-To get started, <strong>Sign Up on <a href="https://mindrbot.pages.dev">MindR</a></strong> and connect your account.
+To get started, <strong>Sign Up on <a href="https://mindr.live">MindR</a></strong> and connect your account.
 <br
 Type <code>/help</code> to see all available commands, or <code>/ask</code> followed by your query.
 
 <strong>Let's take the power of your mind to next level!</strong>
+
+If you like using Mindr, please consider <a href="https://mindr.live/sponsor">donating</a> to support the development. It will mean world to use.
 `;
 
 export const onBoarding = `
@@ -28,14 +30,16 @@ export const onBoarding = `
 - <strong>Organize</strong> your memories with tags and categories.
 
 
-To manage your memories, <strong>visit <a href="https://mindrbot.pages.dev">MindR</a>.</strong>
+To manage your memories, <strong>visit <a href="https://mindr.live">MindR</a>.</strong>
 
 Type <code>/help</code> to see all available commands, or <code>/ask</code> followed by your query.
 
 <strong>Let's take your memory to the next level!</strong>
+
+If you like using Mindr, please consider <a href="https://mindr.live/sponsor">donating</a> to support the development.
 `
 
-export const manageTxt = `Visit <a href="https://mindrbot.pages.dev/dashboard">Your Dashboard</a> to view and manage your stored memories efficiently.
+export const manageTxt = `Visit <a href="https://mindr.live/dashboard">Your Dashboard</a> to view and manage your stored memories efficiently.
 `
 
 export const helpText: string = `<strong>MindR Bot Help</strong>
@@ -55,10 +59,11 @@ MindR is a RAG-based Telegram bot that helps you save and retrieve messages effi
 - Be specific in your queries to get the most relevant results.
 - Regularly manage your saved memories to keep them organized.
 
-For more detailed information and advanced features, please visit our website: <a href="https://mindrbot.pages.dev">MindR</a>
+For more detailed information and advanced features, please visit our website: <a href="https://mindr.live">MindR</a>
 
 If you need further assistance, feel free to contact our support team through the website.
 
+If you like using Mindr, please consider <a href="https://mindr.live/sponsor">donating</a> to support the development.
 `;
 
 export const phrases = [
