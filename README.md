@@ -72,13 +72,16 @@ MindR is a RAG-based (Retrieval-Augmented Generation) Telegram bot that allows u
 
 4.  Set up environment variables:
     Create a `.dev.vars` file in the root directory and add the following:
-    ```
+
+    ````
 
         TELEGRAM_BOT_TOKEN=your_telegram_bot_token
         SUPABASE_URL=your_supabase_project_url
         SUPABASE_KEY=your_supabase_api_key
 
         ```
+
+    ````
 
 5.  Deploy to Cloudflare Workers:
 
@@ -90,11 +93,13 @@ MindR is a RAG-based (Retrieval-Augmented Generation) Telegram bot that allows u
 
 6.  Set up the Telegram bot webhook:
     Replace `YOUR_WORKER_URL` with your Cloudflare Worker URL
-    ```
+
+    ````
 
         curl -F "url=YOUR_WORKER_URL" https://api.telegram.org/bot<YOUR_BOT_TOKEN>/setWebhook
 
         ```
+    ````
 
 ## Usage
 
