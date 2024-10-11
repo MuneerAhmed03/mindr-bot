@@ -48,8 +48,8 @@ function isvalid(obj: any): boolean {
     "poll",
     "contact",
     "venue",
-    "location"
+    "location",
   ];
 
-  return !keys.some(key => key in obj);
+  return !keys.some((key) => key in obj);
 }

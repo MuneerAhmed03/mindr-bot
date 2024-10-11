@@ -1,0 +1,34 @@
+name: Update Parent Repository
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Bot Repository
+        uses: actions/checkout@v2
+
+      - name: Checkout Parent Repository
+        uses: actions/checkout@v2
+        with:
+          repository: MuneerAhmed03/MindR
+          path: parent-repo
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+      - name: Update Frontend Submodule in Parent Repository
+        run: |
+          cd parent-repo  
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git submodule update --init --recursive
+          cd mindr-bot
+          git pull origin main
+          cd ..
+          git add mindr-bot 
+          git commit -m "Update bot submodule to latest commit" --allow-empty  
+          git push origin main

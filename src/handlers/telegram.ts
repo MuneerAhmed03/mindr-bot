@@ -4,9 +4,15 @@ import { query } from "./query";
 import ChatBot from "../lib/utils/ai";
 import { manageTxt, helpText } from "../lib/utils/prompts";
 
-export async function sendMessage(id: number, message: string, token: string,retryCount = 0) {
+export async function sendMessage(
+  id: number,
+  message: string,
+  token: string,
+  retryCount = 0,
+) {
   const MAX_RETRY = 2;
-  const FALLBACK_TEXT = "An error occurred while processing your request. Please try again later.";
+  const FALLBACK_TEXT =
+    "An error occurred while processing your request. Please try again later.";
   try {
     const data = {
       chat_id: id,
@@ -21,7 +27,7 @@ export async function sendMessage(id: number, message: string, token: string,ret
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      }
+      },
     );
     if (!response.ok) {
       const reader = response.body?.getReader();
@@ -38,9 +44,9 @@ export async function sendMessage(id: number, message: string, token: string,ret
         }
       }
 
-      if(retryCount<MAX_RETRY){
-        console.log("Failed to send message", result)
-        return sendMessage(id, FALLBACK_TEXT, token,retryCount+1);
+      if (retryCount < MAX_RETRY) {
+        console.log("Failed to send message", result);
+        return sendMessage(id, FALLBACK_TEXT, token, retryCount + 1);
       }
       throw new Error("Failed to send message");
     }
@@ -65,8 +71,7 @@ export async function handleCommands(message: Message, config: Config) {
         "Hello! I am MindR, your AI Powered Sceond Brain. How can I help you today?";
       break;
     case "help":
-      reply =
-        helpText;
+      reply = helpText;
       break;
     case "ask":
       const memories = await query(message, config);

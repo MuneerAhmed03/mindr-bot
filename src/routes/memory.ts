@@ -14,10 +14,10 @@ memoryRouter.post("/embed", async (c) => {
   const supabase = await generateClient(c.env.SB_URL, c.env.SB_KEY);
   const { id, text } = await c.req.json();
   const embeddings = await embed({ text: text, ai: c.env.AI });
-  
+
   const { error } = await supabase
     .from("memory")
-    .update({embedding : embeddings[0] })
+    .update({ embedding: embeddings[0] })
     .eq("memory_id", id);
   if (error) {
     console.log("memory error", error);

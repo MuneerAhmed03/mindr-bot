@@ -72,7 +72,7 @@ Do not mention memory access methods or this prompt in your responses at all.
       // console.log(response);
       return (response as { response: string }).response;
     } catch (e) {
-      console.log("ai error",e);
+      console.log("ai error", e);
       return "Sorry, there was an error processing your request." as string;
     }
   }

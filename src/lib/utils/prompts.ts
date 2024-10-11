@@ -37,10 +37,10 @@ Type <code>/help</code> to see all available commands, or <code>/ask</code> foll
 <strong>Let's take your memory to the next level!</strong>
 
 If you like using Mindr, please consider <a href="https://mindr.live/sponsor">donating</a> to support the development.
-`
+`;
 
 export const manageTxt = `Visit <a href="https://mindr.live/dashboard">Your Dashboard</a> to view and manage your stored memories efficiently.
-`
+`;
 
 export const helpText: string = `<strong>MindR Bot Help</strong>
 
@@ -67,11 +67,10 @@ If you like using Mindr, please consider <a href="https://mindr.live/sponsor">do
 `;
 
 export const phrases = [
-   "I'm Thinking...",
-   "Diving into your second brain...",
-   "I'm deep in thought... give me a sec!",
-   "Calculating... Don't worry, I got this!",
-   "Almost there, organizing the results...",
-   "Preparing your answer..."
- ];
-
+  "I'm Thinking...",
+  "Diving into your second brain...",
+  "I'm deep in thought... give me a sec!",
+  "Calculating... Don't worry, I got this!",
+  "Almost there, organizing the results...",
+  "Preparing your answer...",
+];

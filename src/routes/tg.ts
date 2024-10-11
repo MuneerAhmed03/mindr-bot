@@ -37,7 +37,7 @@ tgRouter.post("*", async (c) => {
       const response = await sendMessage(
         message.chat.id,
         welcomeMessage,
-        c.env.TELEGRAM_BOT_TOKEN
+        c.env.TELEGRAM_BOT_TOKEN,
       );
       return c.json({ message: "Message sent Successfully!", response });
     } catch (error) {
@@ -50,7 +50,7 @@ tgRouter.post("*", async (c) => {
     const response = await sendMessage(
       message.chat.id,
       "Current Version of MindR can only store text memories",
-      c.env.TELEGRAM_BOT_TOKEN
+      c.env.TELEGRAM_BOT_TOKEN,
     );
     return c.text("Invalid message");
   }
@@ -62,18 +62,17 @@ tgRouter.post("*", async (c) => {
     const intervalId = setInterval(async () => {
       if (index < progressPhrases.length) {
         try {
-            await sendMessage(
-              message.chat.id,
-              progressPhrases[index],
-              c.env.TELEGRAM_BOT_TOKEN
-            );
-            index++;
-          
+          await sendMessage(
+            message.chat.id,
+            progressPhrases[index],
+            c.env.TELEGRAM_BOT_TOKEN,
+          );
+          index++;
         } catch (error) {
           console.log("Error sending progress phrase:", error);
         }
       } else {
-        clearInterval(intervalId); 
+        clearInterval(intervalId);
       }
     }, 3000);
 
@@ -84,13 +83,12 @@ tgRouter.post("*", async (c) => {
       const response = await sendMessage(
         message.chat.id,
         reply,
-        c.env.TELEGRAM_BOT_TOKEN
+        c.env.TELEGRAM_BOT_TOKEN,
       );
       return c.json({ message: "Message sent Successfully!", response });
     } catch (error) {
       return c.json({ message: "Error sending message", error: error });
     }
-
   } else {
     const uuid = uuidv4();
     const { error } = await supabase.from("memory").insert({
@@ -99,7 +97,7 @@ tgRouter.post("*", async (c) => {
       content: message.text,
     });
     if (error) {
-      console.log("Message insertion error",error);
+      console.log("Message insertion error", error);
       return c.json({ message: "Error saving memory", error: error });
     }
   }

@@ -52,53 +52,56 @@ MindR is a RAG-based (Retrieval-Augmented Generation) Telegram bot that allows u
    ```
 
 - Make sure Docker is running.
+
   ```
   bunx supabase start
-  
+
   bunx supabase migrations up
 
-    ```
+  ```
+
 - Go to your supabase project dashboard and run this query in sql editor:
-    ```
-    select vault.create_secret(
-        'YOUR_WORKERS_URL',
-        'workers_url'
-    );
 
-    ```
+  ```
+  select vault.create_secret(
+      'YOUR_WORKERS_URL',
+      'workers_url'
+  );
 
+  ```
 
-4. Set up environment variables:
-Create a `.dev.vars` file in the root directory and add the following:
-    ```
-
-    TELEGRAM_BOT_TOKEN=your_telegram_bot_token
-    SUPABASE_URL=your_supabase_project_url
-    SUPABASE_KEY=your_supabase_api_key
-
+4.  Set up environment variables:
+    Create a `.dev.vars` file in the root directory and add the following:
     ```
 
-5. Deploy to Cloudflare Workers:
+        TELEGRAM_BOT_TOKEN=your_telegram_bot_token
+        SUPABASE_URL=your_supabase_project_url
+        SUPABASE_KEY=your_supabase_api_key
+
+        ```
+
+5.  Deploy to Cloudflare Workers:
+
     ```
 
     bun run deploy
 
     ```
 
-6. Set up the Telegram bot webhook:
-Replace `YOUR_WORKER_URL` with your Cloudflare Worker URL
+6.  Set up the Telegram bot webhook:
+    Replace `YOUR_WORKER_URL` with your Cloudflare Worker URL
     ```
 
-    curl -F "url=YOUR_WORKER_URL" https://api.telegram.org/bot<YOUR_BOT_TOKEN>/setWebhook
+        curl -F "url=YOUR_WORKER_URL" https://api.telegram.org/bot<YOUR_BOT_TOKEN>/setWebhook
 
-    ```
+        ```
 
 ## Usage
 
 1. Start a chat with your bot on Telegram
 2. Send any text message to store it
 3. Use the `/ask` command followed by your query to retrieve relevant messages
-Example: `/ask What did I say about project deadlines?`
+   Example: `/ask What did I say about project deadlines?`
 
 ## Contributing
 
