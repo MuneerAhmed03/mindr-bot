@@ -11,8 +11,8 @@ export async function query(message: Message, env: Config) {
   const { data, error } = await supabase.rpc("similarity_search", {
     embedding: embeddings[0],
     id: id,
-    match_threshold: 0.4,
-  });
+    match_threshold: 0.2,
+  }).limit(5);
   if (error) {
     console.log("error in query", error);
     return "error in query";

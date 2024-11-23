@@ -75,7 +75,8 @@ export async function handleCommands(message: Message, config: Config) {
       break;
     case "ask":
       const memories = await query(message, config);
-      const bot = new ChatBot(config.AI, memories);
+      console.log("memories", memories)
+      const bot = new ChatBot(config.GROQ_KEY, memories);
       const response = await bot.query(messageText);
       // console.log("final", response);
       reply = response;

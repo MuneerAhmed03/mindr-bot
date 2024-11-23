@@ -6,6 +6,7 @@ export type ENV = {
 
 export type Config = {
   TELEGRAM_BOT_TOKEN: string;
+  GROQ_KEY:string;
   AI: Ai;
   SB_URL: string;
   SB_KEY: string;
