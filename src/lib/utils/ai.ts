@@ -78,7 +78,8 @@ interface chat {
       try {
         const completion = await this.client.chat.completions.create({
             messages: this.chat,
-            model : "llama-3.1-8b-instant"
+            model : "llama-3.1-8b-instant",
+            temperature:0.8
         })
         const response = completion.choices[0].message.content;
         // console.log(response as string)
